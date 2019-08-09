@@ -1,0 +1,31 @@
+{
+  "name": "online_payment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://quebec87@github.com/quebec87/online_payment.git"
+  },
+  "author": "iling",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/quebec87/online_payment/issues"
+  },
+  "homepage": "https://github.com/quebec87/online_payment#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "browser-sync": "^2.26.7",
+    "eslint": "^6.1.0",
+    "eslint-config-google": "^0.13.0",
+    "gulp": "^4.0.2",
+    "gulp-minify": "^3.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "jquery": "^3.4.1"
+  }
+}

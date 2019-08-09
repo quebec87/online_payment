@@ -1,0 +1,83 @@
+.btn{
+  display:block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  text-decoration: none;
+  cursor:pointer;
+}
+.payment-btn{
+	position:relative;
+	border:1px solid $secondary-color;
+	@include flexbox(row, center, flex-start);
+	.corner-box{
+		display:none;
+	}
+	img{
+		width:40%;
+		margin:10% 5% 10% 0;
+		opacity:0.8;
+	}
+	p{
+		font-size:1.125em;
+		width:30%;
+		color:$secondary-color;
+	}
+	@media all and (min-width:900px) and (max-width: 1200px) {
+     		font-size:0.8em;           
+     }
+     @media all and (min-width:$pad-media) and (max-width:899px){
+     	font-size:0.6em;
+     }
+	&.active, &:hover{
+		border:1px solid $primary-color;
+		img{
+			opacity:1;
+		}
+		p{
+			color:$primary-color;
+		}
+		.corner-box{
+			display:block;
+			@include buildCorners($primary-color, 10, 1);
+		}
+	}
+
+}
+
+.submit-btn{
+	background-color:$tertiary-color;
+	border:1px solid $secondary-color;
+	color:$text-gray;
+	text-align: center;
+	margin:5px $base-gap*1.5 5px $base-gap*1.5;
+	padding:18px;
+	&:hover{
+		border:1px solid $highlight-yellow;
+		color:$highlight-yellow;
+	}
+}
+
+	.cardicon{
+		visibility:hidden;
+		margin-left:5px;
+		padding:2px 5px;
+		font-size:0.68em;
+		width:auto;
+		color:$tertiary-color;
+		border:1px solid $tertiary-color;
+		border-radius:4px;
+	}	
+
+	.cvv-btn{
+		font-size:0.75em;
+		margin:0 5px 5px 5px;
+		text-align:center;
+		width:16px;
+		height:16px;
+		border-radius:50%;
+		border:1px solid $line-gray;
+		display:inline-block;
+		color:$line-gray;
+	}
