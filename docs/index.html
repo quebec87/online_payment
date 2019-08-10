@@ -28,13 +28,13 @@
 						<div class="form-item">
 							<label >信用卡卡號</label>
 							<input type="text" class="hint" id="cardno"  maxlength="19" value="0000-0000-0000-0000" data-parsley-cardno=""/>
-							<span class="cardicon">cardtype</span>
+							<span id="cardtype" class="cardicon"></span>
 						</div>
 						<div class="form-item">
 							<label>有效年月</label>
 							<input id="month" class="short hint" type="text" reduired maxlength="2" pattern="^(0?[1-9]|1[012])$" value="MM" data-parsley-errors-messages-disabled data-parsley-group="date"/>
 							月 / 
-							<input id="year" class="short hint"  type="text" reduired maxlength="4" pattern="[0-9]{4}" value="YYYY" data-parsley-errors-messages-disabled data-parsley-group="date">
+							<input id="year" class="short hint"  type="text" reduired maxlength="4" min="2019" pattern="[0-9]{4}" value="YYYY" data-parsley-errors-messages-disabled data-parsley-group="date">
 							年
 							<div class="date-validationResult custom-error"></div>
 						</div>
@@ -54,7 +54,7 @@
 							<label>選擇超商</label>
 							<div class="radio-group">
 								<label class="radio-container">
-								  <input id="shop-familymart" type="radio" name="shop" value="familymart" required checked>
+								  <input id="shop-familymart" type="radio" name="shop" value="全家" required checked>
 								  <span class="checkmark"></span>
 								  <span class="radio-text">全家</span>
 								</label>
@@ -83,17 +83,17 @@
 							<label>選擇銀行</label>
 							<div class="radio-group">
 								<label class="radio-container">
-								  <input type="radio" name="bank" value="yusan" required checked>
+								  <input id="bank-yusan" type="radio" name="bank" value="玉山銀行" required checked>
 								  <span class="checkmark"></span>
 								  <span class="radio-text">玉山銀行</span>
 								</label>
 								<label class="radio-container">
-								  <input type="radio" name="bank" value="tw" required>
+								  <input id="bank-tw" type="radio" name="bank" value="台灣銀行" required>
 								  <span class="checkmark"></span>
 								  <span class="radio-text">台灣銀行</span>
 								</label>
 								<label class="radio-container">
-								  <input type="radio" name="bank" value="taishin" required>
+								  <input id="bank-taishin" type="radio" name="bank" value="台新銀行" required>
 								  <span class="checkmark"></span>
 								  <span class="radio-text">台新銀行</span>
 								</label>															
@@ -105,27 +105,187 @@
 						</ol>
 					</form>	
 				</div>
-
 				<div class="deco-line"></div>
 			</div>
-			<a class="btn submit-btn">確定付款($1500)</a>
+			<a class="btn submit-btn screen-submit">確定付款($<span class="total">1500</span>)</a>
 		</div>
-		
+		<div class="result-pane">
+			<div class="result-info-pane credit-result active">
+				<h1 class="blue">[  購買成功! ]</h1>
+				<h5 class="blue center">感謝您的購買</h5>
+				<div class="col-result">
+					<h2 class="box-title">付款明細</h2>
+					<div class="result-detail">
+						<ul class="result-detail_title">
+							<li>訂單編號：</li>
+							<li>訂購人Ｅmail：</li>
+							<li>付款狀態：</li>
+							<li>付款方式：</li>
+						</ul>
+						<ul class="result-detail_content">
+							<li>201908020024</li>
+							<li class="result-email">HSIAOMING@gmail.com</li>
+							<li>已付清</li>
+							<li>末四碼<span class="lastfour">1234 VISA</span> 信用卡</li>							
+						</ul>						
+					</div>
+					<div class="order-container">
+						<ul class="order">
+							<li>流浪金屬史萊姆鎧 甲x 1<span>1000</span></li>
+							<li>抗魔戒指 x 1<span>100</span></li>
+							<li>萬能藥 x 3<span>270</span></li>
+							<li>賢者藥水 x 1<span>130</span></li>
+						</ul>
+						<ul class="extra">
+							<li>超商手續費<span>18</span></li>
+						</ul>
+						<ul class="final-total">
+							<li>TWD<span class="total">1500</span></li>
+						</ul>
+					</div>					
+				</div>
+
+				<div class="result-btn-container">
+					<a class="btn print-btn layer-btn">列印此頁面<span></span></a>
+					<a class="btn back-btn layer-btn">回首頁<span></span></a>
+				</div>
+			</div>
+			<div class="result-info-pane shop-result">
+				<h1 class="blue">[  取號成功! ]</h1>
+				<div class="col-result">
+					<h2 class="box-title">付款明細</h2>
+					<ul class="two-col-result">
+						<li class="qrcode-pane">
+							<p>繳費代碼：</p>
+							<h5>LAM0191020071800038</h5>
+							<p>QR Code:</p>
+							<img src="img/QR.png"/>
+							<p>繳費期限：</p>
+							<h5 class="deadline">2019/08/05 11:35</h5>
+						</li>
+						<li class="result-detail-pane">
+							<div class="result-detail">
+								<ul class="result-detail_title">
+									<li>訂單編號：</li>
+									<li>訂購人Ｅmail：</li>
+									<li>付款狀態：</li>
+									<li>付款方式：</li>
+								</ul>
+								<ul class="result-detail_content">
+									<li>201908020024</li>
+									<li class="result-email">HSIAOMING@gmail.com</li>
+									<li>待付款</li>
+									<li class="orange"><span class="result-shop">7-11</span>超商代碼付款</li>							
+								</ul>						
+							</div>
+							<ol class="memo">
+								<li>1. 請參考繳費流程: <a>全家</a>，<a>7-11</a></li>
+								<li class="orange">2. 需24小時內完成繳費才算交易成功。</li>
+								<li>3. 結帳金額已含超商付費的18元手續費。</li>	
+							</ol>
+						</li>						
+					</ul>
+					<div class="order-container">
+						<ul class="order">
+							<li>流浪金屬史萊姆鎧 甲x 1<span>1000</span></li>
+							<li>抗魔戒指 x 1<span>100</span></li>
+							<li>萬能藥 x 3<span>270</span></li>
+							<li>賢者藥水 x 1<span>130</span></li>
+							<li>超商手續費<span>18</span></li>
+						</ul>
+						<ul class="final-total">
+							<li>TWD<span class="total">1518</span></li>
+						</ul>
+					</div>	
+				</div>
+				<div class="result-btn-container">
+					<a class="btn print-btn layer-btn">列印此頁面<span></span></a>
+					<a class="btn back-btn layer-btn">回首頁<span></span></a>
+				</div>	
+			</div>
+			<div class="result-info-pane atm-result">
+				<h1 class="blue">[  取號成功! ]</h1>
+				<div class="col-result">
+					<h2 class="box-title">付款明細</h2>
+					<ul class="two-col-result">
+						<li class="qrcode-pane">
+							<p>ATM轉帳帳號：</p>
+							<h5>3864268312345678<sapn class="result-bank"> (台新銀行) </span></h5>
+							<p>繳費期限：</p>
+							<h5 class="deadline">2019/08/05 11:35</h5>
+						</li>
+						<li class="result-detail-pane">
+							<div class="result-detail">
+								<ul class="result-detail_title">
+									<li>訂單編號：</li>
+									<li>訂購人Ｅmail：</li>
+									<li>付款狀態：</li>
+									<li>付款方式：</li>
+								</ul>
+								<ul class="result-detail_content">
+									<li>201908020024</li>
+									<li class="result-email">HSIAOMING@gmail.com</li>
+									<li>待付款</li>
+									<li class="orange">ATM轉帳付款</li>							
+								</ul>						
+							</div>
+							<ol class="memo">
+								<li>1. 如果您持有以上金融機構發行之金融卡，可選 擇該金融機構轉帳帳號，可享省下銀行轉帳手 續費。</li>
+								<li class="orange">2. 需24小時內完成繳費才算交易成功。</li>
+							</ol>
+						</li>						
+					</ul>
+					<div class="order-container">
+						<ul class="order">
+							<li>流浪金屬史萊姆鎧 甲x 1<span>1000</span></li>
+							<li>抗魔戒指 x 1<span>100</span></li>
+							<li>萬能藥 x 3<span>270</span></li>
+							<li>賢者藥水 x 1<span>130</span></li>
+						</ul>
+						<ul class="final-total">
+							<li>TWD<span class="total">1500</span></li>
+						</ul>
+					</div>	
+				</div>
+				<div class="result-btn-container">
+					<a class="btn print-btn layer-btn">列印此頁面<span></span></a>
+					<a class="btn back-btn layer-btn">回首頁<span></span></a>
+				</div>	
+			</div>			
+			<div class="success">SUCCESS</div>
+		</div>
+		<div class="thankyou-deco-pane">
+			<ul>
+				<li>T</li>
+				<li>H</li>
+				<li>A</li>
+				<li>N</li>
+				<li>K</li>
+				<li>Y</li>
+				<li>O</li>
+				<li>U</li>
+			</ul>
+		<div class="thankyou-deco-line"></div>			
+		</div>
 	</div>
 	<div class="side-pane">
 		<h1>我的訂單<span class="bottom-line"></span></h1>
-		<ul class="order">
-			<li>流浪金屬史萊姆鎧 甲x 1<span>1000</span></li>
-			<li>抗魔戒指 x 1<span>100</span></li>
-			<li>萬能藥 x 3<span>270</span></li>
-			<li>賢者藥水 x 1<span>130</span></li>
-		</ul>
-		<ul class="extra">
-			<li>超商手續費<span>18</span></li>
-		</ul>
-		<p class="currency">TWD</p>
-		<p class="total">1500</p>
+		<div class="order-container">
+			<ul class="order">
+				<li>流浪金屬史萊姆鎧 甲x 1<span>1000</span></li>
+				<li>抗魔戒指 x 1<span>100</span></li>
+				<li>萬能藥 x 3<span>270</span></li>
+				<li>賢者藥水 x 1<span>130</span></li>
+			</ul>
+			<ul class="extra">
+				<li>超商手續費<span>18</span></li>
+			</ul>
+			<ul class="final-total">
+				<li>TWD<span class="total">1500</span></li>
+			</ul>
+		</div>
 	</div>
+	<a class="btn submit-btn mobile-submit">確定付款($<span class="total">1500</span>)</a>
 </main>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"

@@ -2,17 +2,32 @@ body{
 	background-color: $bg-color;
 	color:$text-gray;
 	font-family: 'Segoe UI','微軟正黑體','Noto Sans TC', sans-serif;
+	font-weight:300;
 }
 
 h1{
 	font-size:1.25em;
 	text-align: center;
 }
-
+h2{
+	font-size:1.125em;
+}
+h5{
+	font-size:0.875em;
+}
+.blue{
+	color:$primary-color;
+}
+.center{
+	text-align:center;
+}
+.orange{
+	color:$highlight-orange;
+}
 
 main{
 	@include flexbox(row, flex-start, center);
-	height:90vh;
+	min-height:90vh;
 	width:100vw;
 	margin-top:5vh;
 	@include vertical-width{
@@ -29,14 +44,12 @@ main{
 	border-bottom:1px solid $line-gray;
 }
 
-.corner-box{
-
-}
 
 form{
 	text-align:left;
 	.form-item{
 		margin-bottom:20px;
+		position:relative;
 	}
 	label{
 		font-size:0.875em;
@@ -71,17 +84,18 @@ form{
 	#cardno{
 		letter-spacing:5px;
 	}
-	.memo{
-		border:1px solid $secondary-color;
-		padding:$base-gap*0.5;
-		margin:0 0 $base-gap*0.5 0;
-		font-size:0.875em;
-		li{
-			padding:5px 0;
-		}
-		a{
-			text-decoration:underline;
-		}
+}
+
+.memo{
+	border:1px solid $secondary-color;
+	padding:$base-gap*0.5;
+	margin:0 0 $base-gap*0.5 0;
+	font-size:0.875em;
+	li{
+		padding:5px 0;
+	}
+	a{
+		text-decoration:underline;
 	}
 }
 .radio-group{
@@ -157,7 +171,6 @@ form{
 }
 
 
-
 ///parsley customo
 .parsley-errors-list{
 	font-size:0.68em;
@@ -194,11 +207,21 @@ form{
 .main-pane{
 	width:$main-size;
 	height:100%;
+	min-height:90vh;
 	border:1px solid $secondary-color;
 	margin-right:5px;
 	position: relative;
+	@include pc-width{
+		width:$main-pc-size;
+	}
+	@include pad-width{
+		width:$main-pad-size;
+	}
 	@include vertical-width{
 		width:$main-mobile-size;
+		border:none;
+		height:auto;
+		min-height:auto;
 	}
 	.corner-box{
 		position: absolute;
@@ -207,25 +230,29 @@ form{
 		width:calc( 100% - 10px);
 		height:calc(100% - 10px);
 		@include buildCorners($secondary-color, 10, 1);
+		@include vertical-width{
+			display:none;
+		}
 	}
 	.payment-pane{
+		// display:none;
 		position:relative;
 		text-align: center;
 		h1{
 			position: relative;
 			padding-top: $base-gap;
-
 		}
 		.payment-selector{
 			padding:$base-gap $base-gap*1.5 0 $base-gap*1.5;
-
 			@include flexbox(row, center, space-between);
 			li{
 				width:30%;
 			}
+			@include vertical-width{
+				padding:$base-gap $base-gap*0.5 0 $base-gap*0.5;				
+			}
 		}
 		.select-line{
-			//position:absolute;
 			height:$base-gap;
 			width:1px;
 			background-color:$primary-color;
@@ -245,6 +272,9 @@ form{
 			border:1px solid $secondary-color;
 			margin:0 $base-gap*1.5 10px $base-gap*1.5;
 			height:auto;
+			@include vertical-width{
+				margin:0 $base-gap*0.5 10px $base-gap*0.5;
+			}
 			.deco-line{
 				//https://stackoverflow.com/questions/22371753/fill-div-with-vertical-or-horizontal-lines
 				background-image: linear-gradient(to left, $secondary-color 0%, transparent 20%);
@@ -263,25 +293,219 @@ form{
 			}
 		}
 	}
+	.result-pane{
+		display:none;
+		padding:$base-gap;
+		position:relative;
+		@include vertical-width{
+			padding:$base-gap $base-gap*0.5;
+			min-height:92vh;
+		}
+		.box-title{
+			padding:8px 20px;
+			display:block;
+			border:1px solid $secondary-color;
+			position:absolute;
+			z-index:30;
+			top:-20px;
+			left: calc(50% - 60px);
+			background-color:$bg-color;
+		}
+		.result-info-pane{
+			display:none;
+			&.active{
+				display:block;
+			}
+		}
+		.col-result{
+			position:relative;
+			margin:$base-gap*1.5 $base-gap 0 $base-gap;
+			border:1px solid $secondary-color;
+			@include v-to-pc{
+				margin:$base-gap*1.5 0 0 0;
+			}
+		}
+		.two-col-result{
+			@include flexbox(row, flex-start, flex-start);
+			height:auto;
 
-}
+			.qrcode-pane{
+				width:45%;
+				padding:$base-gap*0.5 $base-gap $base-gap*0.3 $base-gap;
+				p{
+					font-size:0.75em;
+				}
+				h5{
+					color:$highlight-yellow;
+					.result-bank{
+						font-size:0.75em;
+						color:$highlight-yellow;
+						padding-bottom:25px;
+					}
+				}
 
-.side-pane{
-	width:$side-size;
-	height:auto;
-	border:1px solid $secondary-color;
-	position:relative;
-	@include vertical-width{
-		width:$side-mobile-size;
-	}
-	h1{
-		position: relative;
-		padding-top: $base-gap;
-		.bottom-line {
-			width:30%;
-			left:35%;
+			}
+			.result-detail-pane{
+				width:55%;
+				border-left:1px solid $secondary-color;
+				@include flexbox(column, flex-start, flex-start);
+				.result-detail{
+					padding-top:$base-gap;
+					padding-left:$base-gap*0.5;
+				}
+				.memo{
+					font-size:0.75em;
+					border:none;
+					width:100%;
+					margin:0;
+					padding:5px $base-gap*0.5;
+					border-top:1px solid $secondary-color;
+				}
+			}
+			@include pad-width{
+				.qrcode-pane{
+					padding:$base-gap $base-gap*0.5 $base-gap*0.3 $base-gap*0.5;
+				}
+			}
+			@include vertical-width{
+				@include flexbox(column, flex-start, flex-start);	
+				.qrcode-pane{
+					width:100%;
+					padding:$base-gap $base-gap*1.5 $base-gap*0.3 $base-gap*1.5;
+					border-bottom:1px solid $secondary-color;
+					p{
+						float:left;
+						width:40%;
+					}
+					h5, img{
+						padding-bottom:10px;
+					}
+					img{
+						padding-right:20px;
+					}
+				}
+				.result-detail-pane{
+					border-left:none;
+					width:100%;
+					.result-detail{
+						padding-left:$base-gap;
+						padding-right:$base-gap;
+					}
+					.memo{
+						padding:5px $base-gap;
+					}
+				}
+			}	
+		}
+		.atm-result{
+			.qrcode-pane{
+				padding:$base-gap $base-gap $base-gap $base-gap;		
+				@include pad-width{
+					padding:$base-gap $base-gap*0.5 $base-gap*0.3 $base-gap*0.5;
+				}
+				@include vertical-width{
+					padding:$base-gap $base-gap*1.5 $base-gap*0.3 $base-gap*1.5;
+				}		
+			}
+		}
+		.result-detail{
+			width:100%;
+			padding:8% 10% $base-gap*0.5 10%;
+			font-size:0.75em;
+			@include flexbox(row, flex-start, space-between);
+			@include vertical-width{
+				padding:10% 10% $base-gap*0.5 10%;
+			}
+			li{
+				padding-bottom:5px;
+			}
+			&_title{
+				width:40%;
+			}
+			&_content{
+				width:60%;
+			}
+		}
+		.result-btn-container{
+			margin:0 $base-gap*2 0 $base-gap*2;
+			border-left:1px solid $secondary-color;
+			border-right:1px solid $secondary-color;
+			border-bottom:1px solid $secondary-color;
+			position:relative;
+			height:$base-gap*1.5;
+			background: transparent;
+			z-index:2;
+			@include flexbox(row, flex-end, space-around);
+			.layer-btn{
+				margin-bottom:-20px;
+			}
+			@include vertical-width{
+				margin:0 $base-gap 0 $base-gap;
+			}
+		}
+		.success{
+			// display:none;
+			position:absolute;
+			top:calc((100% - 60px) * 0.5);
+			width:calc(100% - #{$base-gap*2});
+			height:60px;
+			background-color:rgba($tertiary-color, 0.6);
+			border:1px solid #D2A735;
+			text-align: center;
+			font-size:2em;
+			letter-spacing:5px;
+			line-height:60px;
+			color:$highlight-yellow;
+			@include vertical-width{
+				left:-$base-gap*0.5;
+				width:calc(100% + #{$base-gap});
+			}
 		}
 	}
+	.order-container{
+		border-top:1px solid $secondary-color;
+		padding:0 10% $base-gap*0.5 10%;
+		.order, .extra{
+			padding-top:$base-gap*0.5;
+			padding-bottom:0;
+			li{
+				margin-bottom:5px;
+			}
+		}
+		.final-total{
+			margin:10px 2vh 0px $base-gap;
+		}
+	}
+	.thankyou-deco-pane{
+		display:none;
+		position:absolute;
+	    left:10px;
+	    bottom:5px;
+	    width:calc(100% - 30px);
+	    @include vertical-width{
+	    	position:relative;
+	    }
+	    .thankyou-deco-line{
+			//https://stackoverflow.com/questions/22371753/fill-div-with-vertical-or-horizontal-lines
+			background-image: linear-gradient(to left, $secondary-color 0%, transparent 20%);
+		    background-size: 10px 100%;
+			width:100%;
+		    height:10px;
+		}
+	    ul{
+	    	@include flexbox(row, flex-start, flex-start);
+	    	margin-left:calc(10px + 10%);
+	    	margin-bottom:3px;
+	    	color:$secondary-color;
+	    	li{
+	    		width:12%;
+	    	}
+	    }
+	}
+	
+}
+
+.order-container{
 	.order, .extra{
 		margin:0 2vh;
 		padding:$base-gap 0 $base-gap*0.5 0;
@@ -301,17 +525,42 @@ form{
 			display:block;
 		}
 	}
-
-	.currency{
+	.final-total{
 		color:$secondary-color;
 		font-size:0.875em;
-		margin:$base-gap auto $base-gap $base-gap;	
-		float:left;	
-	}
-	.total{
+		margin:$base-gap*0.5 2vh $base-gap*0.5 $base-gap;	
+		.total{
+			float:right;
 		color:$primary-color;
 		font-size:1.375em;
-		margin:$base-gap*0.7 $base-gap*0.5 $base-gap auto;
-		float:right;
+		float:right;			
+		}
+	}
+}
+
+.side-pane{
+	// display:none;
+	width:$side-size;
+	height:auto;
+	border:1px solid $secondary-color;
+	position:relative;
+	padding-bottom:$base-gap*0.5;
+	@include pc-width{
+		width:$side-pc-size;
+	}
+	@include pad-width{
+		width:$side-pad-size;
+	}
+	@include vertical-width{
+		width:calc(#{$side-mobile-size} - #{$base-gap});
+		margin:0 $base-gap*0.5 $base-gap*0.5 $base-gap*0.5;
+	}
+	h1{
+		position: relative;
+		padding-top: $base-gap;
+		.bottom-line {
+			width:30%;
+			left:35%;
+		}
 	}
 }

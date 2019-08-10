@@ -12,8 +12,22 @@
   }
  }
 
+@mixin pc-width(){
+			@media all and (min-width:900px) and (max-width: 1150px) {
+	     		@content;       
+	    }
+	}
+@mixin pad-width(){	
+	    @media all and (min-width:$pad-media) and (max-width:899px){
+	     	@content;
+	    }
+	}
 
-
+@mixin v-to-pc(){
+	@media all and (max-width:1200px){
+		@content;
+	}
+}
 
 
 //https://codepen.io/ThiemelJiri/post/3-css-border-in-corners-techniques 
