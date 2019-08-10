@@ -7,7 +7,9 @@ Link: https://quebec87.github.io/online_payment
 
 # Finished:
 form validation
+
 credit card detection and validation
+
 responsive web design
 
 # TODO:
